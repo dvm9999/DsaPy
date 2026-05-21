@@ -9,9 +9,9 @@ class Solution:
             cut1 = (low + high) >> 1
             cut2 = ((n1 + n2 + 1) //2 ) - cut1            
             l1 = -float(inf) if cut1 == 0 else nums1[cut1-1]
-            r1 =  float(inf) if cut1 == n1 else nums1[cut1]            
-            l2=  -float(inf) if cut2 == 0 else nums2[cut2-1]
-            r2= float(inf) if cut2== n2 else nums2[cut2]            
+            r1 = float(inf) if cut1 == n1 else nums1[cut1]            
+            l2 = -float(inf) if cut2 == 0 else nums2[cut2-1]
+            r2 = float(inf) if cut2== n2 else nums2[cut2]            
             if l1 <= r2 and l2 <= r1:
                 if (n1 + n2) % 2:
                     return max(l1,l2)
