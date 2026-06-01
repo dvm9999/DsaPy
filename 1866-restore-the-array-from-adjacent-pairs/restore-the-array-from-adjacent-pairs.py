@@ -1,24 +1,20 @@
 class Solution:
-    def restoreArray(self, adjacentPairs: List[List[int]]) -> List[int]:
+    def restoreArray(self, adjacentPairs: List[List[int]]) -> List[int]:        
         graph = defaultdict(list)
-        indegree = Counter()
-        for a, b in adjacentPairs:
-            graph[a].append(b)
-            graph[b].append(a)
-            indegree[a] += 1
-            indegree[b] += 1
-        result = []
+        res = []
+        for x, y in adjacentPairs:
+            graph[x].append(y)
+            graph[y].append(x)        
+        visited = set()
         def dfs(n):
-            result.append(n)
-            del indegree[n]
-            for adj in graph[n]:
-                indegree[adj] -= 1
-                if indegree[adj] == 1 or indegree[adj] == 0:
-                    dfs(adj)
-        for n in indegree:
-            if indegree[n] == 1:
-                dfs(n)
-                break
-        return result
-
+            visited.add(n)
+            res.append(n)
+            for a in graph[n]:
+                if a not in visited:
+                    dfs(a)
         
+        for v in graph:
+            if len(graph[v]) == 1:
+                dfs(v)
+                break
+        return res       
